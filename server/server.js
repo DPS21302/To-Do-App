@@ -16,7 +16,7 @@ connectDB();
 app.use(
     cors({
         origin: [
-            "https://to-do-app-h26i.vercel.app",
+            "https://todo-new-frontend.netlify.app",
             "http://localhost:3000",
             "http://localhost:5173",
             "http://localhost:5174",
