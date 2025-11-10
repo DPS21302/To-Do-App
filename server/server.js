@@ -24,9 +24,9 @@ app.use(
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+        preflightContinue: false
     })
 );
-// app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
