@@ -16,14 +16,17 @@ connectDB();
 app.use(
     cors({
         origin: [
-            "https://todo-new-frontend.netlify.app",
+            "https://to-do-app-h26i.vercel.app",
             "http://localhost:3000",
             "http://localhost:5173",
             "http://localhost:5174",
         ],
-        methods: ["GET", "POST", "PUT", "DELETE"],
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
         credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+         exposedHeaders: ["Content-Range", "X-Content-Range"],
+        preflightContinue: false,
+        optionsSuccessStatus: 204
     })
 );
 app.options('*', cors());
