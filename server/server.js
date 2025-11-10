@@ -13,18 +13,33 @@ const app = express();
 
 connectDB();
 
+// CORS configuration
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    "https://to-do-app-h26i.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5174",
+].filter(Boolean); // Remove undefined values
+
 app.use(
     cors({
-        origin: [
-            process.env.CLIENT_URL,
-            "https://to-do-app-h26i.vercel.app",
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "http://localhost:5174",
-        ],
+        origin: function (origin, callback) {
+            // Allow requests with no origin (like mobile apps or curl requests)
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.indexOf(origin) !== -1) {
+                callback(null, true);
+            } else {
+                console.log('Blocked by CORS:', origin);
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
         credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+        exposedHeaders: ["Content-Range", "X-Content-Range"],
+        maxAge: 600 // Cache preflight request for 10 minutes
     })
 );
 
