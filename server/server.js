@@ -16,7 +16,6 @@ connectDB();
 app.use(
     cors({
         origin: [
-            process.env.CLIENT_URL,
             "https://to-do-app-h26i.vercel.app",
             "http://localhost:3000",
             "http://localhost:5173",
@@ -24,6 +23,7 @@ app.use(
         ],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
     })
 );
 
