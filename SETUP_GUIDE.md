@@ -194,7 +194,7 @@ To-Do/
 │   ├── utils/
 │   │   ├── emailService.js    # Nodemailer configuration
 │   │   └── generateToken.js
-│   ├── server.js
+│   ├── index.js
 │   ├── .env
 │   └── package.json
 │

@@ -233,7 +233,7 @@ To-Do/
 │   ├── models/           # Mongoose models
 │   ├── routes/           # API routes
 │   ├── utils/            # Utilities (email, JWT)
-│   ├── server.js         # Entry point
+│   ├── index.js         # Entry point
 │   └── package.json
 │
 └── README.md
