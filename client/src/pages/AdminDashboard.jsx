@@ -151,20 +151,20 @@ const AdminDashboard = () => {
                     {statusData.length > 0 ? (
                         <ResponsiveContainer
                             width="100%"
-                            height={300}
-                            className="sm:h-[300px]">
+                            height={350}
+                            className="sm:h-[280px]">
                             <PieChart>
                                 <Pie
                                     data={statusData}
                                     cx="50%"
-                                    cy="45%"
+                                    cy="40%"
                                     labelLine={false}
                                     label={({ name, percent }) =>
                                         `${name}: ${(percent * 100).toFixed(
                                             0
                                         )}%`
                                     }
-                                    outerRadius={100}
+                                    outerRadius={80}
                                     fill="#8884d8"
                                     dataKey="value">
                                     {statusData.map((entry, index) => (
@@ -235,7 +235,15 @@ const AdminDashboard = () => {
                     </div>
                     <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                         <p className="font-semibold text-gray-700">
-                            {stats?.tasksLastWeek > stats?.tasksPreviousWeek ? (
+                            {stats?.tasksPreviousWeek === 0 ? (
+                                stats?.tasksLastWeek > 0 ? (
+                                    <span className="text-green-700">
+                                        ↑ {stats.tasksLastWeek} new tasks this week (no tasks in previous week)
+                                    </span>
+                                ) : (
+                                    <span>No tasks in both weeks</span>
+                                )
+                            ) : stats?.tasksLastWeek > stats?.tasksPreviousWeek ? (
                                 <span className="text-green-700">
                                     ↑{" "}
                                     {(

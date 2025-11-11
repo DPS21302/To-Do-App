@@ -6,14 +6,20 @@ export const getDashboardStats = async (req, res) => {
     const totalTasks = await Task.countDocuments();
     const totalUsers = await User.countDocuments();
 
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    // Get start of today (midnight)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const fourteenDaysAgo = new Date();
-    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+    // Last Week: 7 days ago to today (start of today, not including today)
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 7);
+
+    // Previous Week: 14 days ago to 7 days ago
+    const fourteenDaysAgo = new Date(today);
+    fourteenDaysAgo.setDate(today.getDate() - 14);
 
     const tasksLastWeek = await Task.countDocuments({
-      createdAt: { $gte: sevenDaysAgo }
+      createdAt: { $gte: sevenDaysAgo, $lt: today }
     });
 
     const tasksPreviousWeek = await Task.countDocuments({
